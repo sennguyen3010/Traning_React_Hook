@@ -49,6 +49,33 @@ export default function HeaderHome(props) {
               <NavLink className="dropdown-item" to="/usecallback">
                 UseCallBack
               </NavLink>
+              <NavLink className="dropdown-item" to="/usememo">
+                UseMemo
+              </NavLink>
+              <NavLink className="dropdown-item" to="/useref">
+                UseRef
+              </NavLink>
+            </div>
+          </li>
+
+          <li className="nav-item dropdown">
+            <a
+              className="nav-link dropdown-toggle"
+              href="#"
+              id="dropdownId"
+              data-bs-toggle="dropdown"
+              aria-haspopup="true"
+              aria-expanded="false"
+            >
+              Redux Hook
+            </a>
+            <div className="dropdown-menu" aria-labelledby="dropdownId">
+              <NavLink className="dropdown-item" to="/reduxnumber">
+                Demo Number
+              </NavLink>
+              <NavLink className="dropdown-item" to="/reduxfacebook">
+                Demo Facebook
+              </NavLink>
             </div>
           </li>
         </ul>
