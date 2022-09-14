@@ -21,6 +21,9 @@ import Profile from './pages/HookRoutes/ReactForm/Profile';
 import Detail from './pages/Detail/Detail';
 import Home from './pages/Home/Home';
 import Search from './pages/Search/Search';
+import DemoUseRoute from './pages/DemoUseRoute.jsx/DemoUseRoute';
+import DemoAnimation from './pages/DemoAnimation/DemoAnimation';
+import Login from './pages/Login/Login';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -43,6 +46,9 @@ root.render(
           <Route path="reactform" element={<ReactForm />}></Route>
           <Route path="profile" element={<Profile />}></Route>
           <Route path="search" element={<Search />}></Route>
+          <Route path="customhook" element={<DemoUseRoute />}></Route>
+          <Route path="animation" element={<DemoAnimation />}></Route>
+          <Route path="login" element={<Login />}></Route>
         </Route>
       </Routes>
     </BrowserRouter>

@@ -3,23 +3,47 @@ import React from 'react';
 import { useEffect } from 'react';
 import { useState } from 'react';
 import { NavLink } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { getProductApi, setArrProductAction } from '../../redux/reducers/productReducer';
 
 export default function Home(props) {
-  const [arrProduct, setArrProduct] = useState([]);
+  // const [arrProduct, setArrProduct] = useState([]);
+  const { arrProduct } = useSelector((state) => state.productReducer);
+  const dispatch = useDispatch();
 
   const getApiProduct = async () => {
-    try {
-      let result = await axios({
-        url: 'https://shop.cyberlearn.vn/api/Product',
-        method: 'GET',
-      });
-      console.log('ket qua', result.data.content);
+    // try {
+    //   let result = await axios({
+    //     url: 'https://shop.cyberlearn.vn/api/Product',
+    //     method: 'GET',
+    //   });
+    //   console.log('ket qua', result.data.content);
+    //   //sau khi lay ket qua tu api ve dua vao state arrProduct
+    //   // setArrProduct(result.data.content);
+    //   //dispatch len redux
+    //   const action = setArrProductAction(result.data.content);
+    //   dispatch(action);
+    // } catch (err) {
+    //   console.log(err);
+    // }
+    /**
+     action có 2 dạng: 
+     + action dạng 1: 
+      action = {
+        type: action_name,
+        payload: data
+      }
 
-      //sau khi lay ket qua tu api ve dua vao state arrProduct
-      setArrProduct(result.data.content);
-    } catch (err) {
-      console.log(err);
-    }
+    + action {thunk} 2:
+     action = (dispatch2, getState)=>{
+      //logic xử lý ở đây sau đó có dữ liệu sẽ dùng tham số dispatch2 để đưa
+      redux hoặc thực hiện tiếp 1 logic khác
+     }
+     */
+
+    const actionLoai2 = getProductApi;
+    //dispatch action thunk
+    dispatch(actionLoai2);
   };
   useEffect(() => {
     //sau khi giao dien load xong thi goi api thuc thi

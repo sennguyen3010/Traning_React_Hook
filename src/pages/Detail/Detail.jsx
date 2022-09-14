@@ -2,27 +2,22 @@ import axios from 'axios';
 import React from 'react';
 import { useEffect } from 'react';
 import { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { NavLink, useNavigate, useParams } from 'react-router-dom';
+import { getProductDetailActionApi } from '../../redux/reducers/productReducer';
 
 export default function Detail(props) {
-  const [productDetail, setProductDetail] = useState({});
+  // const [productDetail, setProductDetail] = useState({});
+  const { productDetail } = useSelector((state) => state.productReducer);
   const params = useParams();
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const getProductDetailApi = async () => {
-    try {
-      let result = await axios({
-        url: 'https://shop.cyberlearn.vn/api/Product/getbyid?id=' + params.id,
-        method: 'GET',
-      });
-      console.log('ket qua', result.data.content);
-
-      //sau khi lay ket qua tu api ve dua vao state arrProduct
-      setProductDetail(result.data.content);
-      console.log(productDetail);
-    } catch (err) {
-      console.log(err);
-    }
+    const actionThunk = getProductDetailActionApi(params.id);
+    //async dispatch => {}
+    //logic api goi tai day
+    dispatch(actionThunk);
   };
 
   useEffect(() => {
@@ -50,20 +45,11 @@ export default function Detail(props) {
               return (
                 <div className="col-3" key={index}>
                   <div className="card">
-                    <img
-                      src={item.image}
-                      style={{ objectFit: 'cover' }}
-                      height={200}
-                      className="w-100"
-                      alt=""
-                    />
+                    <img src={item.image} style={{ objectFit: 'cover' }} height={200} className="w-100" alt="" />
                     <div className="card-body">
                       <p>{item.name}</p>
                       <p>{item.price}</p>
-                      <NavLink
-                        className="btn btn-success"
-                        to={`/detail/${item.id}`}
-                      >
+                      <NavLink className="btn btn-success" to={`/detail/${item.id}`}>
                         View detail
                       </NavLink>
                       <button
