@@ -15,7 +15,7 @@ export default function Profile(props) {
   }, []);
 
   const renderOrderHistory = () => {
-    return userLogin.ordersHistory?.map((order, index) => {
+    return userLogin?.ordersHistory?.map((order, index) => {
       return (
         <div className="orderDetail" key={index}>
           <h3>Order detail {moment(order.date).format('MMMM Do YYYY, h:mm:ss a')}</h3>
@@ -58,9 +58,9 @@ export default function Profile(props) {
       <div className="d-flex">
         <div className="w-25">
           <div className="profile mt-5">
-            <img src={userLogin.avatar} alt="..." height={200} />
-            <div>email: {userLogin.email}</div>
-            <div>name: {userLogin.name}</div>
+            <img src={userLogin?.avatar} alt="..." height={200} />
+            <div>email: {userLogin?.email}</div>
+            <div>name: {userLogin?.name}</div>
           </div>
         </div>
         <div className="w-75">

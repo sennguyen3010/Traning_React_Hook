@@ -1,6 +1,7 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { NavLink, useNavigate } from 'react-router-dom';
+import { ACCESS_TOKEN, USER_LOGIN, clearLocalStorage, clearCookie } from '../../util/config';
 
 export default function HeaderHome(props) {
   const navigate = useNavigate();
@@ -8,9 +9,30 @@ export default function HeaderHome(props) {
   const renderNavLink = () => {
     if (userLogin) {
       return (
-        <NavLink className="nav-link" to="/profile">
-          Hello ! {userLogin.email}
-        </NavLink>
+        <>
+          <li>
+            <NavLink className="nav-link" to="/profile">
+              Hello ! {userLogin.email}
+            </NavLink>
+          </li>
+          <li>
+            <a
+              href="#"
+              className="nav-link"
+              style={{ curosr: 'pointer' }}
+              onClick={() => {
+                clearLocalStorage(USER_LOGIN);
+                clearLocalStorage(ACCESS_TOKEN);
+                clearCookie(ACCESS_TOKEN);
+                //F5 lại trang
+                //window.location.reload()
+                window.location.href = '/';
+              }}
+            >
+              Đăng xuất
+            </a>
+          </li>
+        </>
       );
     }
     return (
@@ -41,7 +63,13 @@ export default function HeaderHome(props) {
               Home
             </NavLink>
           </li>
-          <li className="nav-item">{renderNavLink()}</li>
+
+          <li className="nav-item">
+            <NavLink className="nav-link" to="/demohoc">
+              DemoHOC
+            </NavLink>
+          </li>
+          {renderNavLink()}
           <li className="nav-item dropdown">
             <a
               className="nav-link dropdown-toggle"

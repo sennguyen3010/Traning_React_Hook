@@ -1,5 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import axios from 'axios';
+import { http } from '../../util/config';
 
 const initialState = {
   arrProduct: [{ id: 2, name: 'Adidas Prophere Black White' }],
@@ -31,10 +32,12 @@ export default productReducer.reducer;
 export const getProductApi = async (dispatch2) => {
   //xử lý logic api để trả về kq
   try {
-    let result = await axios({
-      url: 'https://shop.cyberlearn.vn/api/Product',
-      method: 'GET',
-    });
+    let result = await http.get('/Product');
+
+    // axios({
+    //   url: 'https://shop.cyberlearn.vn/api/Product',
+    //   method: 'GET',
+    // });
     console.log('ket qua', result.data.content);
     //sau khi lay ket qua tu api ve dua vao state arrProduct
     // setArrProduct(result.data.content);
@@ -51,10 +54,12 @@ export const getProductDetailActionApi = (idProduct) => {
   return async (dispatch) => {
     //logic api gọi tại đây
     try {
-      let result = await axios({
-        url: `https://shop.cyberlearn.vn/api/Product/getbyid?id=${idProduct}`,
-        method: 'GET',
-      });
+      let result = await http.get(`/Product/getbyid?id=${idProduct}`);
+
+      // axios({
+      //   url: `https://shop.cyberlearn.vn/api/Product/getbyid?id=${idProduct}`,
+      //   method: 'GET',
+      // });
 
       //sau khi có dữ liệu gửi lên action loại 1 đưa lên reducer
       const actionLoai1 = setProductDetailAction(result.data.content);
